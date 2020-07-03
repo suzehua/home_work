@@ -1,58 +1,193 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+    <div class="hello" style="width: 60%;margin: 50px auto">
+        <div style="margin: 20px 0px">
+            <el-button style="float: left" @click="modelalert" type="primary">添加員工</el-button>
+            <!--            <el-button @click="toggleSelection()">取消选择</el-button>-->
+        </div>
+
+        <el-table
+                ref="multipleTable"
+                :data="tableData"
+                tooltip-effect="dark"
+                style="width: 100%"
+                @selection-change="handleSelectionChange">
+            <el-table-column
+                    type="selection"
+                    width="55">
+            </el-table-column>
+            <el-table-column
+                    label="姓名"
+                    width="120">
+                <template slot-scope="scope">{{ scope.row.name }}</template>
+            </el-table-column>
+            <el-table-column
+                    prop="phone"
+                    label="手机"
+                    width="120">
+            </el-table-column>
+            <el-table-column
+                    prop="mail"
+                    label="邮箱"
+                    show-overflow-tooltip>
+            </el-table-column>
+            <el-table-column
+                    prop="jobTitle"
+                    label="职务"
+                    show-overflow-tooltip>
+            </el-table-column>
+            <el-table-column
+                    prop="department"
+                    label="部门"
+                    show-overflow-tooltip>
+            </el-table-column>
+        </el-table>
+        <div>
+            <el-pagination
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="pageNum"
+                    :page-sizes="[3, 6, 9, 15]"
+                    :page-size="pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="data.length">
+            </el-pagination>
+        </div>
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+    export default {
+        name: 'HelloWorld',
+        props: {
+            msg: String
+        },
+        data() {
+            return {
+                data: [{
+                    name: '王小虎1',
+                    phone: 15515111511,
+                    mail: '123456789@qq.com',
+                    jobTitle: '部长',
+                    department: '吃饭部',
+                    date: '2016-05-03',
+                },{
+                    name: '王小虎2',
+                    phone: 15515111511,
+                    mail: '123456789@qq.com',
+                    jobTitle: '部长',
+                    department: '吃饭部',
+                    date: '2016-05-03',
+                },{
+                    name: '王小虎3',
+                    phone: 15515111511,
+                    mail: '123456789@qq.com',
+                    jobTitle: '部长',
+                    department: '吃饭部',
+                    date: '2016-05-03',
+                },{
+                    name: '王小虎4',
+                    phone: 15515111511,
+                    mail: '123456789@qq.com',
+                    jobTitle: '部长',
+                    department: '吃饭部',
+                    date: '2016-05-03',
+                },{
+                    name: '王小虎5',
+                    phone: 15515111511,
+                    mail: '123456789@qq.com',
+                    jobTitle: '部长',
+                    department: '吃饭部',
+                    date: '2016-05-03',
+                },{
+                    name: '王小虎6',
+                    phone: 15515111511,
+                    mail: '123456789@qq.com',
+                    jobTitle: '部长',
+                    department: '吃饭部',
+                    date: '2016-05-03',
+                },{
+                    name: '王小虎7',
+                    phone: 15515111511,
+                    mail: '123456789@qq.com',
+                    jobTitle: '部长',
+                    department: '吃饭部',
+                    date: '2016-05-03',
+                },{
+                    name: '王小虎8',
+                    phone: 15515111511,
+                    mail: '123456789@qq.com',
+                    jobTitle: '部长',
+                    department: '吃饭部',
+                    date: '2016-05-03',
+                }],
+                multipleSelection: [],
+                pageNum: 1,
+                pageSize: 3,
+                tableData: [{
+                    name: '王小虎1',
+                    phone: 15515111511,
+                    mail: '123456789@qq.com',
+                    jobTitle: '部长',
+                    department: '吃饭部',
+                    date: '2016-05-03',
+                },{
+                    name: '王小虎2',
+                    phone: 15515111511,
+                    mail: '123456789@qq.com',
+                    jobTitle: '部长',
+                    department: '吃饭部',
+                    date: '2016-05-03',
+                },{
+                    name: '王小虎3',
+                    phone: 15515111511,
+                    mail: '123456789@qq.com',
+                    jobTitle: '部长',
+                    department: '吃饭部',
+                    date: '2016-05-03',
+                }]
+
+            }
+        },
+
+        methods: {
+            toggleSelection(rows) {
+                if (rows) {
+                    rows.forEach(row => {
+                        this.$refs.multipleTable.toggleRowSelection(row);
+                    });
+                } else {
+                    this.$refs.multipleTable.clearSelection();
+                }
+            },
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+            },
+            handleCurrentChange(){
+                alert(this.pageNum+''+''+this.pageSize)
+                this.tableData = []
+                var start =(this.pageNum-1)*this.pageSize
+                var end = start+this.pageSize
+                this.data.forEach((item, index) => {
+                    if (start<=index && end>index){
+                        this.tableData.push(item)
+                    }
+                })
+            },
+            handleSizeChange: function (size) {
+                this.pageSize = size
+                var start =(this.pageNum-1)*this.pageSize
+                var end = start+this.pageSize
+                this.data.forEach((item, index) => {
+                    if (start<=index && end>index){
+                        this.tableData.push(item)
+                    }
+                })
+            }
+        }
+    }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>

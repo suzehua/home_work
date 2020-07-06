@@ -65,7 +65,7 @@
             </el-pagination>
         </div>
         <el-dialog title="添加员工" :visible.sync="dialogFormVisible">
-            <el-form ref="form" :model="form" label-width="80px">
+            <el-form :rules="rules" ref="form" :model="form" label-width="80px">
                 <el-divider content-position="left"></el-divider>
 
                 <el-row>
@@ -73,19 +73,19 @@
                     <el-row>
                         <el-col :offset="2" :span="8">
                             <el-form-item label="中文名" label-width="100px" prop="name">
-                                <el-input/>
+                                <el-input v-model="form.name"/>
                             </el-form-item>
                         </el-col>
                         <el-col :offset="2" :span="8">
-                            <el-form-item label="登录手机号" label-width="100px" prop="businessName">
-                                <el-input/>
+                            <el-form-item label="登录手机号" label-width="100px" prop="phone">
+                                <el-input v-model="form.phone"/>
                             </el-form-item>
                         </el-col>
                     </el-row>
                     <el-row>
                         <el-col :offset="2" :span="18">
-                            <el-form-item label="所属部门" label-width="100px" prop="businessName">
-                                <el-input/>
+                            <el-form-item label="所属部门" label-width="100px" prop="department">
+                                <el-input v-model:/>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -256,7 +256,20 @@
                     name: ''
                 },
                 formLabelWidth: '120px',
-                dialogFormVisible: false
+                dialogFormVisible: false,
+                rules: {
+                    name: [
+                        {required: true, message: '请输入中文名称', trigger: 'blur'},
+                        {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
+                    ],
+                    region: [
+                        {required: true, message: '请输入电话号', trigger: 'blur'},
+                        {min: 11, max: 11, message: '长度为11个字符', trigger: 'blur'}
+                    ],
+                    date1: [
+                        {required: true, message: '请输入所属部门', trigger: 'blur'}
+                    ]
+                }
             }
         },
 
@@ -274,7 +287,7 @@
                 this.multipleSelection = val;
             },
             handleCurrentChange(pageNumber) {
-                alert(this.pageNum +  '_' + this.pageSize +  '_' + pageNumber)
+                alert(this.pageNum + '_' + this.pageSize + '_' + pageNumber)
                 this.tableData = []
                 var start = (pageNumber - 1) * this.pageSize
                 var end = start + this.pageSize

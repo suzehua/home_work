@@ -69,7 +69,7 @@
                 <el-divider content-position="left"></el-divider>
 
                 <el-row>
-                    <el-row><h2 style="float: left">基本信息</h2></el-row>
+                    <el-row><h2 style="margin-right: 800px">基本信息</h2></el-row>
                     <el-row>
                         <el-col :offset="2" :span="8">
                             <el-form-item label="中文名" label-width="100px" prop="name">

@@ -1,7 +1,7 @@
 <template>
     <div class="hello" style="width: 60%;margin: 50px auto">
         <div style="margin: 20px 0px">
-            <el-button style="float: left" @click="modelalert" type="primary">添加員工</el-button>
+            <el-button style="float: left" @click="dialogFormVisible = true" type="primary">添加員工</el-button>
             <!--            <el-button @click="toggleSelection()">取消选择</el-button>-->
         </div>
 
@@ -46,7 +46,7 @@
                     align="center"
                     header-align="center"
             >
-                <template slot-scope="scope">
+                <template slot-scope="">
                     <el-button type="text" size="small">
                         编辑
                     </el-button>
@@ -64,6 +64,96 @@
                     :total="data.length">
             </el-pagination>
         </div>
+        <el-dialog title="添加员工" :visible.sync="dialogFormVisible">
+            <el-form ref="form" :model="form" label-width="80px">
+                <el-divider content-position="left"></el-divider>
+
+                <el-row>
+                    <el-row><h2 style="float: left">基本信息</h2></el-row>
+                    <el-row>
+                        <el-col :offset="2" :span="8">
+                            <el-form-item label="中文名" label-width="100px" prop="name">
+                                <el-input/>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :offset="2" :span="8">
+                            <el-form-item label="登录手机号" label-width="100px" prop="businessName">
+                                <el-input/>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :offset="2" :span="18">
+                            <el-form-item label="所属部门" label-width="100px" prop="businessName">
+                                <el-input/>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </el-row>
+                <el-divider content-position="left">其他信息</el-divider>
+                <el-row>
+                    <el-row>
+                        <el-col :offset="2" :span="8">
+                            <el-form-item label="员工ID" label-width="100px" prop="businessName">
+                                <el-input/>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :offset="2" :span="8">
+                            <el-form-item label="性别" label-width="100px" prop="businessName">
+                                <el-input/>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :offset="2" :span="8">
+                            <el-form-item label="英文名" label-width="100px" prop="businessName">
+                                <el-input/>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :offset="2" :span="8">
+                            <el-form-item label="邮箱" label-width="100px" prop="businessName">
+                                <el-input/>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :offset="2" :span="8">
+                            <el-form-item label="职业" label-width="100px" prop="businessName">
+                                <el-input/>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :offset="2" :span="8">
+                            <el-form-item label="秘书" label-width="100px" prop="businessName">
+                                <el-input/>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :offset="2" :span="8">
+                            <el-form-item label="座机" label-width="100px" prop="businessName">
+                                <el-input/>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :offset="2" :span="8">
+                            <el-form-item label="办公地址" label-width="100px" prop="businessName">
+                                <el-input/>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :offset="2" :span="18">
+                            <el-form-item label="备注" label-width="100px" prop="businessName">
+                                <el-input type="textarea"/>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </el-row>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -156,8 +246,17 @@
                     jobTitle: '部长',
                     department: '吃饭部',
                     date: '2016-05-03',
-                }]
-
+                }],
+                form: {
+                    phone: '',
+                    mail: '',
+                    jobTitle: '',
+                    department: '',
+                    date: '',
+                    name: ''
+                },
+                formLabelWidth: '120px',
+                dialogFormVisible: false
             }
         },
 

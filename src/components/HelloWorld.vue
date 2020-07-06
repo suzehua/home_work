@@ -40,6 +40,18 @@
                     label="部门"
                     show-overflow-tooltip>
             </el-table-column>
+            <el-table-column
+                    label="操作"
+                    fixed="right"
+                    align="center"
+                    header-align="center"
+            >
+                <template slot-scope="scope">
+                    <el-button type="text" size="small">
+                        编辑
+                    </el-button>
+                </template>
+            </el-table-column>
         </el-table>
         <div>
             <el-pagination
@@ -70,49 +82,49 @@
                     jobTitle: '部长',
                     department: '吃饭部',
                     date: '2016-05-03',
-                },{
+                }, {
                     name: '王小虎2',
                     phone: 15515111511,
                     mail: '123456789@qq.com',
                     jobTitle: '部长',
                     department: '吃饭部',
                     date: '2016-05-03',
-                },{
+                }, {
                     name: '王小虎3',
                     phone: 15515111511,
                     mail: '123456789@qq.com',
                     jobTitle: '部长',
                     department: '吃饭部',
                     date: '2016-05-03',
-                },{
+                }, {
                     name: '王小虎4',
                     phone: 15515111511,
                     mail: '123456789@qq.com',
                     jobTitle: '部长',
                     department: '吃饭部',
                     date: '2016-05-03',
-                },{
+                }, {
                     name: '王小虎5',
                     phone: 15515111511,
                     mail: '123456789@qq.com',
                     jobTitle: '部长',
                     department: '吃饭部',
                     date: '2016-05-03',
-                },{
+                }, {
                     name: '王小虎6',
                     phone: 15515111511,
                     mail: '123456789@qq.com',
                     jobTitle: '部长',
                     department: '吃饭部',
                     date: '2016-05-03',
-                },{
+                }, {
                     name: '王小虎7',
                     phone: 15515111511,
                     mail: '123456789@qq.com',
                     jobTitle: '部长',
                     department: '吃饭部',
                     date: '2016-05-03',
-                },{
+                }, {
                     name: '王小虎8',
                     phone: 15515111511,
                     mail: '123456789@qq.com',
@@ -130,14 +142,14 @@
                     jobTitle: '部长',
                     department: '吃饭部',
                     date: '2016-05-03',
-                },{
+                }, {
                     name: '王小虎2',
                     phone: 15515111511,
                     mail: '123456789@qq.com',
                     jobTitle: '部长',
                     department: '吃饭部',
                     date: '2016-05-03',
-                },{
+                }, {
                     name: '王小虎3',
                     phone: 15515111511,
                     mail: '123456789@qq.com',
@@ -162,23 +174,23 @@
             handleSelectionChange(val) {
                 this.multipleSelection = val;
             },
-            handleCurrentChange(){
-                alert(this.pageNum+''+''+this.pageSize)
+            handleCurrentChange(pageNumber) {
+                alert(this.pageNum +  '_' + this.pageSize +  '_' + pageNumber)
                 this.tableData = []
-                var start =(this.pageNum-1)*this.pageSize
-                var end = start+this.pageSize
+                var start = (pageNumber - 1) * this.pageSize
+                var end = start + this.pageSize
                 this.data.forEach((item, index) => {
-                    if (start<=index && end>index){
+                    if (start <= index && end > index) {
                         this.tableData.push(item)
                     }
                 })
             },
             handleSizeChange: function (size) {
                 this.pageSize = size
-                var start =(this.pageNum-1)*this.pageSize
-                var end = start+this.pageSize
+                var start = (this.pageNum - 1) * this.pageSize
+                var end = start + this.pageSize
                 this.data.forEach((item, index) => {
-                    if (start<=index && end>index){
+                    if (start <= index && end > index) {
                         this.tableData.push(item)
                     }
                 })

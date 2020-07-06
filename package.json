@@ -1,6 +1,7 @@
 {
   "name": "user_management_job",
   "version": "0.1.0",
+  "author": "msnnn <841009661@qq.com>",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
